@@ -1,0 +1,390 @@
+{
+  "nodes": [
+    {
+      "id": "analysis-tools",
+      "title": "Analysis tools",
+      "description": "",
+      "dependsOn": [
+        "mir-graph-visualizer",
+        "pfi-doesn-t-handle-inline-frames",
+        "wasm-explorer"
+      ],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "byob-readable-streams",
+      "title": "BYOB readable streams",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "lineary-memory-features",
+        "web-platform-integration"
+      ]
+    },
+    {
+      "id": "component-model",
+      "title": "Component Model",
+      "description": "",
+      "dependsOn": [
+        "component-model-webidl-integration"
+      ],
+      "dependedOnBy": [
+        "web-platform-integration"
+      ]
+    },
+    {
+      "id": "component-model-webidl-integration",
+      "title": "Component Model WebIDL integration",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "component-model"
+      ]
+    },
+    {
+      "id": "custom-descriptors",
+      "title": "Custom Descriptors",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "esm-integration",
+      "title": "ESM-integration",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "web-platform-integration"
+      ]
+    },
+    {
+      "id": "improved-array-constructors",
+      "title": "Improved Array Constructors",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "inline-subset-of-wasm-into-js",
+      "title": "Inline subset of wasm into JS",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "js-customization",
+      "title": "JS Customization",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "js-promise-integration",
+      "title": "JS promise integration",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "web-platform-integration"
+      ]
+    },
+    {
+      "id": "lazy-baseline-compilation",
+      "title": "Lazy baseline compilation",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "lineary-memory-features",
+      "title": "Lineary memory features",
+      "description": "",
+      "dependsOn": [
+        "byob-readable-streams",
+        "memory-discard",
+        "memory-mapping-of-buffers",
+        "static-memory-protection",
+        "type-reflection"
+      ],
+      "dependedOnBy": []
+    },
+    {
+      "id": "memory-discard",
+      "title": "memory.discard",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "lineary-memory-features"
+      ]
+    },
+    {
+      "id": "memory-mapping-of-buffers",
+      "title": "Memory mapping of buffers",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "lineary-memory-features"
+      ]
+    },
+    {
+      "id": "mir-graph-visualizer",
+      "title": "MIR graph visualizer",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "analysis-tools"
+      ]
+    },
+    {
+      "id": "multi-byte-access-to-arrays",
+      "title": "Multi-byte access to Arrays",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "multithreading-features",
+      "title": "Multithreading features",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": []
+    },
+    {
+      "id": "ool-cross-instance-slow-path",
+      "title": "OOL cross-instance slow path",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "optimize-calls-to-imports-of-known-builtin",
+      "title": "Optimize calls to imports of known builtin",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "osr",
+      "title": "OSR",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "performance",
+      "title": "Performance",
+      "description": "",
+      "dependsOn": [
+        "analysis-tools",
+        "inline-subset-of-wasm-into-js",
+        "lazy-baseline-compilation",
+        "ool-cross-instance-slow-path",
+        "optimize-calls-to-imports-of-known-builtin",
+        "osr",
+        "regalloc2",
+        "speculative-call-indirect",
+        "support-more-types-in-jit-exit-entries",
+        "type-based-mir-optimizations",
+        "use-gc-buffer-allocator-for-ool-data"
+      ],
+      "dependedOnBy": []
+    },
+    {
+      "id": "pfi-doesn-t-handle-inline-frames",
+      "title": "PFI doesn't handle inline frames",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "analysis-tools"
+      ]
+    },
+    {
+      "id": "regalloc2",
+      "title": "regalloc2",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "shared-gc-objects",
+      "title": "Shared GC objects",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "sliceref",
+      "title": "sliceref",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "web-platform-integration"
+      ]
+    },
+    {
+      "id": "source-phase-imports",
+      "title": "Source phase imports",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "web-platform-integration"
+      ]
+    },
+    {
+      "id": "speculative-call-indirect",
+      "title": "Speculative call_indirect",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "stack-switching",
+      "title": "Stack Switching",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "static-memory-protection",
+      "title": "Static memory protection",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "lineary-memory-features"
+      ]
+    },
+    {
+      "id": "struct-headers-on-arrays",
+      "title": "Struct Headers on Arrays",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "support-more-types-in-jit-exit-entries",
+      "title": "Support more types in JIT exit/entries",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "type-based-mir-optimizations",
+      "title": "Type based MIR optimizations",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "type-imports",
+      "title": "Type Imports",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "type-reflection",
+      "title": "Type reflection",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "lineary-memory-features",
+        "wasm-gc-features"
+      ]
+    },
+    {
+      "id": "use-gc-buffer-allocator-for-ool-data",
+      "title": "Use GC buffer allocator for OOL data",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "performance"
+      ]
+    },
+    {
+      "id": "wasm-decompiler",
+      "title": "Wasm decompiler",
+      "description": "",
+      "dependsOn": [],
+      "dependedOnBy": [
+        "wasm-explorer"
+      ]
+    },
+    {
+      "id": "wasm-explorer",
+      "title": "Wasm explorer",
+      "description": "",
+      "dependsOn": [
+        "wasm-decompiler"
+      ],
+      "dependedOnBy": [
+        "analysis-tools"
+      ]
+    },
+    {
+      "id": "wasm-gc-features",
+      "title": "Wasm-GC features",
+      "description": "",
+      "dependsOn": [
+        "custom-descriptors",
+        "improved-array-constructors",
+        "js-customization",
+        "multi-byte-access-to-arrays",
+        "shared-gc-objects",
+        "stack-switching",
+        "struct-headers-on-arrays",
+        "type-imports",
+        "type-reflection"
+      ],
+      "dependedOnBy": []
+    },
+    {
+      "id": "web-platform-integration",
+      "title": "Web platform integration",
+      "description": "",
+      "dependsOn": [
+        "byob-readable-streams",
+        "component-model",
+        "esm-integration",
+        "js-promise-integration",
+        "sliceref",
+        "source-phase-imports"
+      ],
+      "dependedOnBy": []
+    }
+  ]
+}
