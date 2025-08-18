@@ -3,7 +3,7 @@
     {
       "id": "atomics-wait-on-main-thread",
       "title": "Atomics.wait on main thread",
-      "description": "",
+      "description": "Remove restriction from blocking the main thread to remove spin-loop hacks that users are currently doing.",
       "dependsOn": [
         "relaxed-atomics"
       ]
@@ -11,7 +11,7 @@
     {
       "id": "binary-macros",
       "title": "Binary macros",
-      "description": "",
+      "description": "Add a binary macro feature to reduce the in-memory size of modules.",
       "dependsOn": [
         "compact-binary-imports"
       ]
@@ -19,7 +19,7 @@
     {
       "id": "byob-readable-streams",
       "title": "BYOB readable streams",
-      "description": "",
+      "description": "[Adapt readable streams spec to work with wasm shared memory](https://github.com/WebAssembly/memory-control/blob/main/proposals/memory-control/byob.md)",
       "dependsOn": [
         "memory-discard"
       ]
@@ -27,7 +27,7 @@
     {
       "id": "call-indirect-speculative-inlining",
       "title": "call_indirect speculative inlining",
-      "description": "",
+      "description": "Speculate monomorphic/polymorphic call_indirect instructions, like we do with call_ref.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -35,7 +35,7 @@
     {
       "id": "compact-binary-imports",
       "title": "Compact binary imports",
-      "description": "",
+      "description": "[Remove redundancy from binary format around imports](https://github.com/WebAssembly/compact-import-section)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -43,7 +43,7 @@
     {
       "id": "component-model-mvp",
       "title": "Component Model MVP",
-      "description": "",
+      "description": "[Portable, composable, separately compiled, wasm components](https://github.com/WebAssembly/component-model)",
       "dependsOn": [
         "esm-integration",
         "js-promise-integration"
@@ -52,7 +52,7 @@
     {
       "id": "component-model-webidl-bindings",
       "title": "Component Model WebIDL bindings",
-      "description": "",
+      "description": "Map component types with WebIDL types to allow direct importing of WebIDL interfaces.",
       "dependsOn": [
         "component-model-mvp"
       ]
@@ -60,7 +60,7 @@
     {
       "id": "custom-descriptors",
       "title": "Custom descriptors",
-      "description": "",
+      "description": "[Store wasm values in the RTT of a GC object for space savings](https://github.com/WebAssembly/custom-descriptors)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -68,7 +68,7 @@
     {
       "id": "esm-integration",
       "title": "ESM integration",
-      "description": "",
+      "description": "[Integrate wasm modules into the ESM loader](https://github.com/WebAssembly/esm-integration)",
       "dependsOn": [
         "source-phase-imports",
         "webassembly-features"
@@ -85,15 +85,15 @@
     {
       "id": "in-memory-caching-of-modules",
       "title": "In-memory caching of modules",
-      "description": "",
+      "description": "Add an in-memory cache of compiled wasm modules. Integrate with the browser script loader when we have esm-integration.",
       "dependsOn": [
-        "update-serialization-to-work-with-lazy-tiering"
+        "update-caching-to-work-with-lazy-tiering"
       ]
     },
     {
       "id": "inline-subset-of-wasm-into-js",
       "title": "Inline subset of wasm into JS",
-      "description": "",
+      "description": "Inline a small subset of wasm opcodes into JS. Improves performance of tiny accessors functions.",
       "dependsOn": [
         "support-more-reftypes-in-jit-entry-exit-stubs"
       ]
@@ -101,15 +101,15 @@
     {
       "id": "integrate-wasm-explorer-in-devtools",
       "title": "Integrate wasm-explorer in devtools",
-      "description": "",
+      "description": "Replace the wasmparser.js/CodeMirror wasm viewer with an embedded wasm-explorer component. Reduces maintenance burden.",
       "dependsOn": [
         "wasm-explorer"
       ]
     },
     {
-      "id": "js-customization",
-      "title": "JS customization",
-      "description": "",
+      "id": "js-interop-of-gc-objects",
+      "title": "JS interop of GC objects",
+      "description": "[Set the prototype of GC objects so that they interop with JS code](https://github.com/WebAssembly/custom-descriptors)",
       "dependsOn": [
         "custom-descriptors"
       ]
@@ -117,7 +117,7 @@
     {
       "id": "js-promise-integration",
       "title": "JS promise integration",
-      "description": "",
+      "description": "[Suspend and resume wasm execution in response to JS promises](https://github.com/WebAssembly/js-promise-integration)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -125,7 +125,7 @@
     {
       "id": "js-type-reflection",
       "title": "JS type reflection",
-      "description": "",
+      "description": "[Add a type accessor to wasm objects exposed to JS](https://github.com/WebAssembly/js-types)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -133,7 +133,7 @@
     {
       "id": "lazy-baseline-compilation",
       "title": "Lazy baseline compilation",
-      "description": "",
+      "description": "Skip baseline compilation and only validate initially. Compile baseline functions on demand.",
       "dependsOn": [
         "optimize-the-linking-step-for-huge-modules"
       ]
@@ -141,7 +141,7 @@
     {
       "id": "memory-discard",
       "title": "memory.discard",
-      "description": "",
+      "description": "[Allow users to give pages back to the OS](https://github.com/WebAssembly/memory-control/blob/main/proposals/memory-control/discard.md)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -149,7 +149,7 @@
     {
       "id": "memory-map-array-buffers",
       "title": "memory.map array buffers",
-      "description": "",
+      "description": "Map an array buffer into the high half of wasm memory. Uses the high-bit as guard to execute an alternative load/store path for memory accesses.",
       "dependsOn": [
         "static-memory-protection"
       ]
@@ -157,7 +157,7 @@
     {
       "id": "mir-visualizer",
       "title": "MIR visualizer",
-      "description": "",
+      "description": "Create an interactive HTML based iongraph tool that is easier to read and analyze.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -165,7 +165,7 @@
     {
       "id": "mir-visualizer-in-profiler",
       "title": "MIR visualizer in profiler",
-      "description": "",
+      "description": "Integrate the new MIR visualizer in the profiler, with sample counts for finding hot code.",
       "dependsOn": [
         "mir-visualizer"
       ]
@@ -173,7 +173,7 @@
     {
       "id": "move-barrier-execution-into-ool-code",
       "title": "Move barrier execution into OOL code",
-      "description": "",
+      "description": "Improve code layout for common case, reducing icache pressure and mispredictions.",
       "dependsOn": [
         "move-null-traps-into-ool-code"
       ]
@@ -181,7 +181,7 @@
     {
       "id": "move-cross-instance-call-slow-path-into-ool-code",
       "title": "Move cross-instance call slow path into OOL code",
-      "description": "",
+      "description": "Improve code layout for common case, reducing icache pressure and mispredictions.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -189,7 +189,7 @@
     {
       "id": "move-null-traps-into-ool-code",
       "title": "Move null traps into OOL code",
-      "description": "",
+      "description": "Improve code layout for common case, reducing icache pressure and mispredictions.",
       "dependsOn": [
         "move-cross-instance-call-slow-path-into-ool-code"
       ]
@@ -199,13 +199,13 @@
       "title": "multi-byte access to arrays",
       "description": "",
       "dependsOn": [
-        "js-customization"
+        "js-interop-of-gc-objects"
       ]
     },
     {
       "id": "optimize-calls-to-imports-of-known-builtins",
       "title": "Optimize calls to imports of known builtins",
-      "description": "",
+      "description": "Let users import builtins like `DataView.prototype.XYZ` and have calls to that import skip the JS interpreter exit and go directly to the native implementation.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -213,7 +213,7 @@
     {
       "id": "optimize-stack-map-creation-and-storage",
       "title": "Optimize stack map creation and storage",
-      "description": "",
+      "description": "Allow sharing identical stack maps between call sites, speed up creation of them in baseline.",
       "dependsOn": [
         "optimize-the-linking-step-for-huge-modules"
       ]
@@ -221,7 +221,7 @@
     {
       "id": "optimize-the-linking-step-for-huge-modules",
       "title": "Optimize the linking step for huge modules",
-      "description": "",
+      "description": "The linking step is linear in module size and doesn't benefit much from parallelism. Find a way to speed it up.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -229,7 +229,7 @@
     {
       "id": "osr-of-baseline",
       "title": "OSR of baseline",
-      "description": "",
+      "description": "Add on-stack-replacement of baseline functions so that we can tier up in long running baseline code.",
       "dependsOn": [
         "call-indirect-speculative-inlining"
       ]
@@ -237,7 +237,7 @@
     {
       "id": "primitive-builtins",
       "title": "Primitive builtins",
-      "description": "",
+      "description": "[Builtins for manipulating JS primitives](https://github.com/WebAssembly/js-primitive-builtins)",
       "dependsOn": [
         "string-builtins-v2"
       ]
@@ -245,7 +245,7 @@
     {
       "id": "regalloc2",
       "title": "regalloc2",
-      "description": "",
+      "description": "Find a way to improve quality of register allocations for very hot code. Maybe import regalloc2/3?",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -253,7 +253,7 @@
     {
       "id": "relaxed-atomics",
       "title": "relaxed atomics",
-      "description": "",
+      "description": "[Add a relaxed consistency to atomic memory accesses for improved performance](https://github.com/WebAssembly/shared-everything-threads)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -261,7 +261,7 @@
     {
       "id": "remove-asm-js",
       "title": "Remove asm.js",
-      "description": "",
+      "description": "Less security and fuzz bugs to deal with.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -269,7 +269,7 @@
     {
       "id": "replace-stub-generators-with-ion-or-baseline",
       "title": "Replace stub generators with Ion or Baseline",
-      "description": "",
+      "description": "Simplify our JIT entry/exits stubs by replacing them with special wasm opcodes and compiling them in Ion/Baseline with special prologue/epilogues.",
       "dependsOn": [
         "inline-subset-of-wasm-into-js"
       ]
@@ -277,7 +277,7 @@
     {
       "id": "shared-function-references",
       "title": "Shared function references",
-      "description": "",
+      "description": "Allow sharing a funcref across worker threads. Enables dynamic linking with shared memory, and reduces memory usage.",
       "dependsOn": [
         "relaxed-atomics"
       ]
@@ -285,7 +285,7 @@
     {
       "id": "shared-gc-objects",
       "title": "Shared GC objects",
-      "description": "",
+      "description": "[Add shared GC objects so GC modules can work across threads](https://github.com/WebAssembly/shared-everything-threads)",
       "dependsOn": [
         "wasm-tls-or-per-stack-context"
       ]
@@ -295,13 +295,13 @@
       "title": "sliceref",
       "description": "",
       "dependsOn": [
-        "js-customization"
+        "js-interop-of-gc-objects"
       ]
     },
     {
       "id": "source-phase-imports",
       "title": "Source phase imports",
-      "description": "",
+      "description": "[Allow JS to import the 'source' of a module](https://github.com/tc39/proposal-source-phase-imports)",
       "dependsOn": [
         "webassembly-features"
       ]
@@ -309,7 +309,7 @@
     {
       "id": "stack-switching",
       "title": "Stack switching",
-      "description": "",
+      "description": "[Suspend and resume wasm execution in wasm code](https://github.com/WebAssembly/stack-switching)",
       "dependsOn": [
         "js-promise-integration"
       ]
@@ -317,7 +317,7 @@
     {
       "id": "standard-debug-adapter-component",
       "title": "Standard debug adapter component",
-      "description": "",
+      "description": "Standardize a debug adapter protocol based on components. Get toolchains to support it, and support it in our DevTools.",
       "dependsOn": [
         "integrate-wasm-explorer-in-devtools"
       ]
@@ -325,7 +325,7 @@
     {
       "id": "static-memory-protection",
       "title": "Static memory protection",
-      "description": "",
+      "description": "[Give wasm memory a no-access, read-only, and read-write regions](https://github.com/WebAssembly/memory-control/blob/main/proposals/memory-control/static-protection.md).",
       "dependsOn": [
         "byob-readable-streams"
       ]
@@ -333,7 +333,7 @@
     {
       "id": "string-builtins-v2",
       "title": "String builtins V2",
-      "description": "",
+      "description": "Add a builtin type import for strings for reduced type checks, and better UTF-8 support.",
       "dependsOn": [
         "type-imports"
       ]
@@ -349,7 +349,7 @@
     {
       "id": "support-more-reftypes-in-jit-entry-exit-stubs",
       "title": "Support more reftypes in JIT entry/exit stubs",
-      "description": "",
+      "description": "Support more reftypes in JIT entry/exits stubs for faster entry/exit of wasm-GC code.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -357,15 +357,15 @@
     {
       "id": "type-imports",
       "title": "Type imports",
-      "description": "",
+      "description": "[Allow importing a type so users can import an abstract interface that doesn't expose the exact representation](https://github.com/WebAssembly/proposal-type-imports)",
       "dependsOn": [
         "webassembly-features"
       ]
     },
     {
-      "id": "update-serialization-to-work-with-lazy-tiering",
-      "title": "Update serialization to work with lazy tiering",
-      "description": "",
+      "id": "update-caching-to-work-with-lazy-tiering",
+      "title": "Update caching to work with lazy tiering",
+      "description": "Get caching working with lazy tiering.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -373,7 +373,7 @@
     {
       "id": "use-gc-buffer-allocator-for-ool-data",
       "title": "Use GC buffer allocator for OOL data",
-      "description": "",
+      "description": "Simplify GC by removing Malloc'ed block cache, and maybe improve performance.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -381,7 +381,7 @@
     {
       "id": "wasm-decompiler",
       "title": "wasm-decompiler",
-      "description": "",
+      "description": "Make a [decompiler](https://github.com/eqrion/wasm-decompile) that makes analyzing what a wasm function is doing simpler. Integrate it into wasm-explorer.",
       "dependsOn": [
         "wasm-explorer"
       ]
@@ -389,7 +389,7 @@
     {
       "id": "wasm-explorer",
       "title": "wasm-explorer",
-      "description": "",
+      "description": "Start an open-source [wasm-explorer] project for efficiently analyzing very large wasm module. Contribute it to the bytecode alliance and try to get external contributors.",
       "dependsOn": [
         "webassembly-engine"
       ]
@@ -397,7 +397,7 @@
     {
       "id": "wasm-tls-or-per-stack-context",
       "title": "Wasm TLS or per-stack context",
-      "description": "",
+      "description": "[Add thread-local globals or the per-stack context feature so that source language TLS works with shared functions](https://github.com/WebAssembly/shared-everything-threads)",
       "dependsOn": [
         "shared-function-references"
       ]
