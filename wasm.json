@@ -1,11 +1,19 @@
 {
   "nodes": [
     {
-      "id": "analysis-tools",
-      "title": "Analysis tools",
+      "id": "atomics-wait-on-main-thread",
+      "title": "Atomics.wait on main thread",
       "description": "",
       "dependsOn": [
-        "performance"
+        "relaxed-atomics"
+      ]
+    },
+    {
+      "id": "binary-macros",
+      "title": "Binary macros",
+      "description": "",
+      "dependsOn": [
+        "compact-binary-imports"
       ]
     },
     {
@@ -13,48 +21,73 @@
       "title": "BYOB readable streams",
       "description": "",
       "dependsOn": [
-        "lineary-memory-features",
-        "web-platform-integration"
+        "memory-discard"
       ]
     },
     {
-      "id": "component-model",
-      "title": "Component Model",
+      "id": "call-indirect-speculative-inlining",
+      "title": "call_indirect speculative inlining",
       "description": "",
       "dependsOn": [
-        "web-platform-integration"
+        "webassembly-engine"
       ]
     },
     {
-      "id": "component-model-webidl-integration",
-      "title": "Component Model WebIDL integration",
+      "id": "compact-binary-imports",
+      "title": "Compact binary imports",
       "description": "",
       "dependsOn": [
-        "component-model"
+        "webassembly-features"
+      ]
+    },
+    {
+      "id": "component-model-mvp",
+      "title": "Component Model MVP",
+      "description": "",
+      "dependsOn": [
+        "esm-integration",
+        "js-promise-integration"
+      ]
+    },
+    {
+      "id": "component-model-webidl-bindings",
+      "title": "Component Model WebIDL bindings",
+      "description": "",
+      "dependsOn": [
+        "component-model-mvp"
       ]
     },
     {
       "id": "custom-descriptors",
-      "title": "Custom Descriptors",
+      "title": "Custom descriptors",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "webassembly-features"
       ]
     },
     {
       "id": "esm-integration",
-      "title": "ESM-integration",
+      "title": "ESM integration",
       "description": "",
       "dependsOn": [
-        "web-platform-integration"
+        "source-phase-imports",
+        "webassembly-features"
       ]
     },
     {
       "id": "improved-array-constructors",
-      "title": "Improved Array Constructors",
+      "title": "Improved array constructors",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "multi-byte-access-to-arrays"
+      ]
+    },
+    {
+      "id": "in-memory-caching-of-modules",
+      "title": "In-memory caching of modules",
+      "description": "",
+      "dependsOn": [
+        "update-serialization-to-work-with-lazy-tiering"
       ]
     },
     {
@@ -62,15 +95,23 @@
       "title": "Inline subset of wasm into JS",
       "description": "",
       "dependsOn": [
-        "performance"
+        "support-more-reftypes-in-jit-entry-exit-stubs"
+      ]
+    },
+    {
+      "id": "integrate-wasm-explorer-in-devtools",
+      "title": "Integrate wasm-explorer in devtools",
+      "description": "",
+      "dependsOn": [
+        "wasm-explorer"
       ]
     },
     {
       "id": "js-customization",
-      "title": "JS Customization",
+      "title": "JS customization",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "custom-descriptors"
       ]
     },
     {
@@ -78,7 +119,15 @@
       "title": "JS promise integration",
       "description": "",
       "dependsOn": [
-        "web-platform-integration"
+        "webassembly-features"
+      ]
+    },
+    {
+      "id": "js-type-reflection",
+      "title": "JS type reflection",
+      "description": "",
+      "dependsOn": [
+        "webassembly-features"
       ]
     },
     {
@@ -86,89 +135,111 @@
       "title": "Lazy baseline compilation",
       "description": "",
       "dependsOn": [
-        "performance"
+        "optimize-the-linking-step-for-huge-modules"
       ]
-    },
-    {
-      "id": "lineary-memory-features",
-      "title": "Lineary memory features",
-      "description": "",
-      "dependsOn": []
     },
     {
       "id": "memory-discard",
       "title": "memory.discard",
       "description": "",
       "dependsOn": [
-        "lineary-memory-features"
+        "webassembly-features"
       ]
     },
     {
-      "id": "memory-mapping-of-buffers",
-      "title": "Memory mapping of buffers",
+      "id": "memory-map-array-buffers",
+      "title": "memory.map array buffers",
       "description": "",
       "dependsOn": [
-        "lineary-memory-features"
+        "static-memory-protection"
       ]
     },
     {
-      "id": "mir-graph-visualizer",
-      "title": "MIR graph visualizer",
+      "id": "mir-visualizer",
+      "title": "MIR visualizer",
       "description": "",
       "dependsOn": [
-        "analysis-tools"
+        "webassembly-engine"
+      ]
+    },
+    {
+      "id": "mir-visualizer-in-profiler",
+      "title": "MIR visualizer in profiler",
+      "description": "",
+      "dependsOn": [
+        "mir-visualizer"
+      ]
+    },
+    {
+      "id": "move-barrier-execution-into-ool-code",
+      "title": "Move barrier execution into OOL code",
+      "description": "",
+      "dependsOn": [
+        "move-null-traps-into-ool-code"
+      ]
+    },
+    {
+      "id": "move-cross-instance-call-slow-path-into-ool-code",
+      "title": "Move cross-instance call slow path into OOL code",
+      "description": "",
+      "dependsOn": [
+        "webassembly-engine"
+      ]
+    },
+    {
+      "id": "move-null-traps-into-ool-code",
+      "title": "Move null traps into OOL code",
+      "description": "",
+      "dependsOn": [
+        "move-cross-instance-call-slow-path-into-ool-code"
       ]
     },
     {
       "id": "multi-byte-access-to-arrays",
-      "title": "Multi-byte access to Arrays",
+      "title": "multi-byte access to arrays",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "js-customization"
       ]
     },
     {
-      "id": "multithreading-features",
-      "title": "Multithreading features",
-      "description": "",
-      "dependsOn": []
-    },
-    {
-      "id": "ool-cross-instance-slow-path",
-      "title": "OOL cross-instance slow path",
+      "id": "optimize-calls-to-imports-of-known-builtins",
+      "title": "Optimize calls to imports of known builtins",
       "description": "",
       "dependsOn": [
-        "performance"
+        "webassembly-engine"
       ]
     },
     {
-      "id": "optimize-calls-to-imports-of-known-builtin",
-      "title": "Optimize calls to imports of known builtin",
+      "id": "optimize-stack-map-creation-and-storage",
+      "title": "Optimize stack map creation and storage",
       "description": "",
       "dependsOn": [
-        "performance"
+        "optimize-the-linking-step-for-huge-modules"
       ]
     },
     {
-      "id": "osr",
-      "title": "OSR",
+      "id": "optimize-the-linking-step-for-huge-modules",
+      "title": "Optimize the linking step for huge modules",
       "description": "",
       "dependsOn": [
-        "performance"
+        "webassembly-engine"
       ]
     },
     {
-      "id": "performance",
-      "title": "Performance",
-      "description": "",
-      "dependsOn": []
-    },
-    {
-      "id": "pfi-doesn-t-handle-inline-frames",
-      "title": "PFI doesn't handle inline frames",
+      "id": "osr-of-baseline",
+      "title": "OSR of baseline",
       "description": "",
       "dependsOn": [
-        "analysis-tools"
+        "call-indirect-speculative-inlining"
+      ]
+    },
+    {
+      "id": "primitive-builtins",
+      "title": "Primitive builtins",
+      "description": "",
+      "dependsOn": [
+        "string-builtins-v2"
       ]
     },
     {
@@ -176,7 +247,39 @@
       "title": "regalloc2",
       "description": "",
       "dependsOn": [
-        "performance"
+        "webassembly-engine"
+      ]
+    },
+    {
+      "id": "relaxed-atomics",
+      "title": "relaxed atomics",
+      "description": "",
+      "dependsOn": [
+        "webassembly-features"
+      ]
+    },
+    {
+      "id": "remove-asm-js",
+      "title": "Remove asm.js",
+      "description": "",
+      "dependsOn": [
+        "webassembly-engine"
+      ]
+    },
+    {
+      "id": "replace-stub-generators-with-ion-or-baseline",
+      "title": "Replace stub generators with Ion or Baseline",
+      "description": "",
+      "dependsOn": [
+        "inline-subset-of-wasm-into-js"
+      ]
+    },
+    {
+      "id": "shared-function-references",
+      "title": "Shared function references",
+      "description": "",
+      "dependsOn": [
+        "relaxed-atomics"
       ]
     },
     {
@@ -184,7 +287,7 @@
       "title": "Shared GC objects",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "wasm-tls-or-per-stack-context"
       ]
     },
     {
@@ -192,7 +295,7 @@
       "title": "sliceref",
       "description": "",
       "dependsOn": [
-        "web-platform-integration"
+        "js-customization"
       ]
     },
     {
@@ -200,23 +303,23 @@
       "title": "Source phase imports",
       "description": "",
       "dependsOn": [
-        "web-platform-integration"
-      ]
-    },
-    {
-      "id": "speculative-call-indirect",
-      "title": "Speculative call_indirect",
-      "description": "",
-      "dependsOn": [
-        "performance"
+        "webassembly-features"
       ]
     },
     {
       "id": "stack-switching",
-      "title": "Stack Switching",
+      "title": "Stack switching",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "js-promise-integration"
+      ]
+    },
+    {
+      "id": "standard-debug-adapter-component",
+      "title": "Standard debug adapter component",
+      "description": "",
+      "dependsOn": [
+        "integrate-wasm-explorer-in-devtools"
       ]
     },
     {
@@ -224,48 +327,47 @@
       "title": "Static memory protection",
       "description": "",
       "dependsOn": [
-        "lineary-memory-features"
+        "byob-readable-streams"
+      ]
+    },
+    {
+      "id": "string-builtins-v2",
+      "title": "String builtins V2",
+      "description": "",
+      "dependsOn": [
+        "type-imports"
       ]
     },
     {
       "id": "struct-headers-on-arrays",
-      "title": "Struct Headers on Arrays",
+      "title": "Struct headers on arrays",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "improved-array-constructors"
       ]
     },
     {
-      "id": "support-more-types-in-jit-exit-entries",
-      "title": "Support more types in JIT exit/entries",
+      "id": "support-more-reftypes-in-jit-entry-exit-stubs",
+      "title": "Support more reftypes in JIT entry/exit stubs",
       "description": "",
       "dependsOn": [
-        "performance"
-      ]
-    },
-    {
-      "id": "type-based-mir-optimizations",
-      "title": "Type based MIR optimizations",
-      "description": "",
-      "dependsOn": [
-        "performance"
+        "webassembly-engine"
       ]
     },
     {
       "id": "type-imports",
-      "title": "Type Imports",
+      "title": "Type imports",
       "description": "",
       "dependsOn": [
-        "wasm-gc-features"
+        "webassembly-features"
       ]
     },
     {
-      "id": "type-reflection",
-      "title": "Type reflection",
+      "id": "update-serialization-to-work-with-lazy-tiering",
+      "title": "Update serialization to work with lazy tiering",
       "description": "",
       "dependsOn": [
-        "lineary-memory-features",
-        "wasm-gc-features"
+        "webassembly-engine"
       ]
     },
     {
@@ -273,12 +375,12 @@
       "title": "Use GC buffer allocator for OOL data",
       "description": "",
       "dependsOn": [
-        "performance"
+        "webassembly-engine"
       ]
     },
     {
       "id": "wasm-decompiler",
-      "title": "Wasm decompiler",
+      "title": "wasm-decompiler",
       "description": "",
       "dependsOn": [
         "wasm-explorer"
@@ -286,21 +388,29 @@
     },
     {
       "id": "wasm-explorer",
-      "title": "Wasm explorer",
+      "title": "wasm-explorer",
       "description": "",
       "dependsOn": [
-        "analysis-tools"
+        "webassembly-engine"
       ]
     },
     {
-      "id": "wasm-gc-features",
-      "title": "Wasm-GC features",
+      "id": "wasm-tls-or-per-stack-context",
+      "title": "Wasm TLS or per-stack context",
+      "description": "",
+      "dependsOn": [
+        "shared-function-references"
+      ]
+    },
+    {
+      "id": "webassembly-engine",
+      "title": "WebAssembly engine",
       "description": "",
       "dependsOn": []
     },
     {
-      "id": "web-platform-integration",
-      "title": "Web platform integration",
+      "id": "webassembly-features",
+      "title": "WebAssembly features",
       "description": "",
       "dependsOn": []
     }
