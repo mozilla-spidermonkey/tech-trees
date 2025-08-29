@@ -1,4 +1,5 @@
 [
-    "turbo-encabulator",
-    "wasm"
+    "js",
+    "wasm",
+    "turbo-encabulator"
 ]
