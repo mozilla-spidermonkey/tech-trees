@@ -1,6 +1,14 @@
 {
   "nodes": [
     {
+      "id": "add-mode-that-does-not-allocate-executable-pages",
+      "title": "Add mode that does not allocate executable pages",
+      "description": "",
+      "dependsOn": [
+        "include-precompiled-stuff-in-binary-as-build-step"
+      ]
+    },
+    {
       "id": "better-bytecode-for-destructuring",
       "title": "Better bytecode for destructuring",
       "description": "SpiderMonkey generates a lot of bytecode for destructuring. For example,\n\n```\nfunction f(x) { let [a,b,c] = x; return a+b+c;}\n```\n\ngenerates 301 ops today. On the other hand, we know other engines do better. JSC for example uses only 36 ops for the above function[^1].\n\n[^1]: `jsc -d -e \"function f(x) { let [a,b,c] = x; return a+b+c;} f([1,2,3])`",
@@ -12,6 +20,12 @@
       "id": "bytecode-improvements",
       "title": "Bytecode Improvements",
       "description": "",
+      "dependsOn": []
+    },
+    {
+      "id": "cacheir-improvements",
+      "title": "\"CacheIR improvements\"",
+      "description": "WINK",
       "dependsOn": []
     },
     {
@@ -52,6 +66,12 @@
       ]
     },
     {
+      "id": "embed-generated-code-in-binary",
+      "title": "Embed generated code in binary",
+      "description": "Being able to generate our own object files _with SpiderMonkey_, that then get integrated into the build, could unlock interesting new capabilities.",
+      "dependsOn": []
+    },
+    {
       "id": "faster-implementation-of-array-destructuring",
       "title": "Faster implementation of array destructuring",
       "description": "Array destructuring is tricky, because it basically accesses index 0, index 1, etc. through the prototype. If someone has messed with the prototype, all kinds of funky things can happen. But, if we already know something about the array, we could emit much faster code.",
@@ -76,6 +96,49 @@
       ]
     },
     {
+      "id": "in-binary-baseline-interpreter",
+      "title": "In-binary baseline interpreter",
+      "description": "",
+      "dependsOn": [
+        "embed-generated-code-in-binary",
+        "precompile-baseline-interpreter"
+      ]
+    },
+    {
+      "id": "in-binary-cacheir-stubs",
+      "title": "In-binary CacheIR stubs",
+      "description": "",
+      "dependsOn": [
+        "embed-generated-code-in-binary"
+      ]
+    },
+    {
+      "id": "in-binary-self-hosted-baseline-code",
+      "title": "In-binary self-hosted baseline code",
+      "description": "",
+      "dependsOn": [
+        "embed-generated-code-in-binary",
+        "precompile-all-self-hosted-code-to-baseline"
+      ]
+    },
+    {
+      "id": "in-binary-trampolines",
+      "title": "In-binary trampolines",
+      "description": "",
+      "dependsOn": [
+        "embed-generated-code-in-binary"
+      ]
+    },
+    {
+      "id": "include-precompiled-stuff-in-binary-as-build-step",
+      "title": "Include precompiled stuff in binary as build step",
+      "description": "",
+      "dependsOn": [
+        "precompile-baseline-interpreter",
+        "precompile-baseline-stubs"
+      ]
+    },
+    {
       "id": "optimize-bytecode-emission",
       "title": "Optimize bytecode emission",
       "description": "Our bytecode emission requires lots of complicated classes to manage state. TODO(mgaudet)",
@@ -92,12 +155,50 @@
       ]
     },
     {
+      "id": "precompile-all-self-hosted-code-to-baseline",
+      "title": "Precompile all self-hosted code to baseline",
+      "description": "",
+      "dependsOn": [
+        "runtime-and-realm-independent-self-hosted-code"
+      ]
+    },
+    {
+      "id": "precompile-baseline-interpreter",
+      "title": "Precompile baseline interpreter",
+      "description": "Compile the baseline interpreter outside the context of a single JSRuntime, for reuse across different JSRuntimes. This does not necessarily require emitting object files or other C++-build-time work.",
+      "dependsOn": [
+        "cacheir-improvements"
+      ]
+    },
+    {
+      "id": "precompile-baseline-stubs",
+      "title": "Precompile baseline stubs",
+      "description": "",
+      "dependsOn": [
+        "cacheir-improvements"
+      ]
+    },
+    {
       "id": "precompiled-evals",
       "title": "Precompiled evals",
       "description": "String literals in evals (for indirect evals only?) could be compiled ahead of time.",
       "dependsOn": [
         "redo-the-eval-cache"
       ]
+    },
+    {
+      "id": "prepopulate-ion-ic-chains",
+      "title": "Prepopulate Ion IC chains",
+      "description": "When doing off-thread compilation, we could fill in the stub chains for Ion ICs we generate.",
+      "dependsOn": [
+        "cacheir-improvements"
+      ]
+    },
+    {
+      "id": "realm-independent-self-hosted-code",
+      "title": "Realm-independent self-hosted code",
+      "description": "",
+      "dependsOn": []
     },
     {
       "id": "redo-the-eval-cache",
@@ -122,12 +223,45 @@
       ]
     },
     {
+      "id": "reusable-inline-caches",
+      "title": "Reusable inline caches",
+      "description": "Store information about ICs and redeploy on new page loads. Natural extension of JIT hints and baseline hints.",
+      "dependsOn": [
+        "cacheir-improvements"
+      ]
+    },
+    {
       "id": "run-from-stencil",
       "title": "Run From Stencil",
       "description": "In cases where the CompilationStencil lives past the initial call to instantiateStencils, we can avoid allocating JSFunctions that have lazy parents (as well as the BaseScript). Doing so would reduce the latency from having stencil data in memory to executing the first opcode in a given Realm. This may be useful in browser startup cases where the ScriptPreloader has pinned the stencil data across multiple Fission processes.\n\nCurrently these allocated functions store information such as closed-of-bindings and SourceExtent, but this information would continue to be available from the stencil so we can defer the allocation until their parent function is delazified. This will also save memory for functions are never have their parents called and reduce GC traffic.\n\nThe primary blockers are the JS Debugger, but it can be modified to delazify on-demand the scripts that it actually requires.\n",
       "bugzillaNumber": 1662156,
       "dependsOn": [
         "convert-scopes-from-gc-to-non-gc-things"
+      ]
+    },
+    {
+      "id": "runtime-and-realm-independent-self-hosted-code",
+      "title": "Runtime- and realm-independent self-hosted code",
+      "description": "Like realm-independent code, but cooler.",
+      "dependsOn": [
+        "realm-independent-self-hosted-code"
+      ]
+    },
+    {
+      "id": "save-inline-caches-to-disk",
+      "title": "Save inline caches to disk",
+      "description": "A [paper published in 2019](https://dl.acm.org/doi/10.1145/3314221.3314587) used a data-driven approach to cache and pre-fill inline cache chains on applications. We could potentially do something similar once we have a disk-cache to store data to.",
+      "dependsOn": [
+        "reusable-inline-caches"
+      ]
+    },
+    {
+      "id": "shared-ion-ics",
+      "title": "Shared Ion ICs",
+      "description": "We do not share ICs for Ion code, because we thought it would be better for each IC to be specific to its chain. We would now like to undo this decision.",
+      "bugzillaNumber": 1817277,
+      "dependsOn": [
+        "cacheir-improvements"
       ]
     },
     {
