@@ -1,0 +1,143 @@
+{
+  "nodes": [
+    {
+      "id": "better-bytecode-for-destructuring",
+      "title": "Better bytecode for destructuring",
+      "description": "SpiderMonkey generates a lot of bytecode for destructuring. For example,\n\n```\nfunction f(x) { let [a,b,c] = x; return a+b+c;}\n```\n\ngenerates 301 ops today. On the other hand, we know other engines do better. JSC for example uses only 36 ops for the above function[^1].\n\n[^1]: `jsc -d -e \"function f(x) { let [a,b,c] = x; return a+b+c;} f([1,2,3])`",
+      "dependsOn": [
+        "implement-iterator-protocol-with-ics"
+      ]
+    },
+    {
+      "id": "bytecode-improvements",
+      "title": "Bytecode Improvements",
+      "description": "",
+      "dependsOn": []
+    },
+    {
+      "id": "cacheir-ops-backed-by-self-hosted-code",
+      "title": "CacheIR ops backed by self-hosted code",
+      "description": "Create CacheIR ops that are backed by self-hosted code, as a way of handling complicated scenarios in bytecode while allowing fast-path generation in the common case.\n\nRelevant documents:\n- [Better CacheIR Slow Paths](https://docs.google.com/document/d/1ez0VcRNkeZp1oBczrClL96c0ghnMzM2INFEEkEj9qrY/edit?tab=t.0#heading=h.5q7w199eqtrj) by Iain\n\nThe initial version could use `js::Call`. Later this could have a better calling convention for ICs.",
+      "dependsOn": [
+        "bytecode-improvements"
+      ]
+    },
+    {
+      "id": "callscriptedproxyfoo-ops-backed-by-self-hosted-code",
+      "title": "CallScriptedProxyFoo ops backed by self-hosted code",
+      "description": "",
+      "dependsOn": [
+        "cacheir-ops-backed-by-self-hosted-code"
+      ]
+    },
+    {
+      "id": "convert-scopes-from-gc-to-non-gc-things",
+      "title": "Convert scopes from GC to non-GC things",
+      "description": "Right now, scope objects are GC'd objects. They could really be ref counted because there is a very obvious structure. This means that we cannot generate scope objects at parse time. If they were _not_ GC objects, and they really shouldn't be because they are just tables of data, we could then do some interesting stuff afterwards, such as:\n\n- Much lazier instantiation of functions\n- More work done in the stencil, which could be saved to disk, shared across processes, etc.\n",
+      "dependsOn": []
+    },
+    {
+      "id": "detect-immutable-objects-at-parse-time",
+      "title": "Detect immutable objects at parse time",
+      "description": "In some circumstances we are able to tell that an object is immutable at parse time. If the parser could indicate this we might be able to produce faster code. See Bug 183095 for some previous investigation.\n\nThis is pretty difficult actually since our parser does not have a great way to track writes. It is hard to a priori say that some object literal is clearly immutable. But, there are cases where _if_ we knew it was immutable, we could constant propagate out of an object literal.\n\nA potential variant: Speculatively do this, and use a fuse to protect the code that depends on it. This would relate to [Jan's work](https://bugzilla.mozilla.org/show_bug.cgi?id=1972572) to bake in constant property values on certain objects.\n\nSee also:\n- https://bugzilla.mozilla.org/show_bug.cgi?id=1830195\n- [Fastpath Access to Immutable Closed Over Objects](https://docs.google.com/document/d/1kNh8M76ZlyWPQWSCw3HJ_vAHRgHQ1S0oNUXZgwE6JvQ/edit?tab=t.0#heading=h.9tpi8adt8mw3)\n",
+      "bugzillaNumber": 1830195,
+      "dependsOn": []
+    },
+    {
+      "id": "easier-to-optimize-generator-bytecode",
+      "title": "Easier-to-optimize generator bytecode",
+      "description": "Right now [we don’t have full JIT support for generators nor async functions](https://bugzilla.mozilla.org/show_bug.cgi?id=1681338). Full support with our current design is challenging.\n\n[Quoting Jan](https://bugzilla.mozilla.org/show_bug.cgi?id=1839078):\n\n> Longer-term we should redo our implementation to support resuming in Ion code. Other engines transform generators to look more like a normal function with a switch-statement to make JIT support easier.\n",
+      "dependsOn": [
+        "bytecode-improvements"
+      ]
+    },
+    {
+      "id": "faster-implementation-of-array-destructuring",
+      "title": "Faster implementation of array destructuring",
+      "description": "Array destructuring is tricky, because it basically accesses index 0, index 1, etc. through the prototype. If someone has messed with the prototype, all kinds of funky things can happen. But, if we already know something about the array, we could emit much faster code.",
+      "dependsOn": [
+        "better-bytecode-for-destructuring"
+      ]
+    },
+    {
+      "id": "faster-implementation-of-for-of",
+      "title": "Faster implementation of for-of",
+      "description": "TODO(iain)",
+      "dependsOn": [
+        "implement-iterator-protocol-with-ics"
+      ]
+    },
+    {
+      "id": "implement-iterator-protocol-with-ics",
+      "title": "Implement Iterator protocol with ICs",
+      "description": "",
+      "dependsOn": [
+        "cacheir-ops-backed-by-self-hosted-code"
+      ]
+    },
+    {
+      "id": "optimize-bytecode-emission",
+      "title": "Optimize bytecode emission",
+      "description": "Our bytecode emission requires lots of complicated classes to manage state. TODO(mgaudet)",
+      "dependsOn": [
+        "regenerate-bytecode-for-correctness"
+      ]
+    },
+    {
+      "id": "optimize-immutable-object-lookups",
+      "title": "Optimize immutable object lookups",
+      "description": "Re: the parent item, this would be the point where we actually use the detected info about immutable objects to do constant propagation and other fanciness.",
+      "dependsOn": [
+        "detect-immutable-objects-at-parse-time"
+      ]
+    },
+    {
+      "id": "precompiled-evals",
+      "title": "Precompiled evals",
+      "description": "String literals in evals (for indirect evals only?) could be compiled ahead of time.",
+      "dependsOn": [
+        "redo-the-eval-cache"
+      ]
+    },
+    {
+      "id": "redo-the-eval-cache",
+      "title": "Redo the eval cache",
+      "description": "We keep getting benchmarks that lean on the eval cache. TODO(jandem)",
+      "dependsOn": []
+    },
+    {
+      "id": "reduce-overhead-of-self-hosted-cacheir-ops",
+      "title": "Reduce overhead of self-hosted CacheIR ops",
+      "description": "",
+      "dependsOn": [
+        "cacheir-ops-backed-by-self-hosted-code"
+      ]
+    },
+    {
+      "id": "regenerate-bytecode-for-correctness",
+      "title": "Regenerate bytecode for correctness",
+      "description": "The ability to relazify anything would allow us to start optimizing bytecode (with the large caveat that we’d need to handle cases where optimized functions are on the stack and who knows what that looks like).\n\nFor example, what if we generated bytecode that was wrong in the general case, but right in context? (e.g. based on the state of a fuse)",
+      "dependsOn": [
+        "universal-relazification"
+      ]
+    },
+    {
+      "id": "run-from-stencil",
+      "title": "Run From Stencil",
+      "description": "In cases where the CompilationStencil lives past the initial call to instantiateStencils, we can avoid allocating JSFunctions that have lazy parents (as well as the BaseScript). Doing so would reduce the latency from having stencil data in memory to executing the first opcode in a given Realm. This may be useful in browser startup cases where the ScriptPreloader has pinned the stencil data across multiple Fission processes.\n\nCurrently these allocated functions store information such as closed-of-bindings and SourceExtent, but this information would continue to be available from the stencil so we can defer the allocation until their parent function is delazified. This will also save memory for functions are never have their parents called and reduce GC traffic.\n\nThe primary blockers are the JS Debugger, but it can be modified to delazify on-demand the scripts that it actually requires.\n",
+      "bugzillaNumber": 1662156,
+      "dependsOn": [
+        "convert-scopes-from-gc-to-non-gc-things"
+      ]
+    },
+    {
+      "id": "universal-relazification",
+      "title": "Universal Relazification",
+      "description": "This would be the ability to relazify any script. Currently we can only relazify leaf scripts.",
+      "bugzillaNumber": 1162497,
+      "dependsOn": [
+        "convert-scopes-from-gc-to-non-gc-things"
+      ]
+    }
+  ]
+}
